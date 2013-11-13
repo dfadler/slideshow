@@ -1,0 +1,11 @@
+{
+    "framework": "mocha",
+    "test_page": "test/client/testem.mustache",
+    "src_files": [
+        "test/client/**/*.js",
+        "public/javascripts/**/*.js"
+    ],
+    "src_files_ignore": [
+        "public/javascripts/vendor/**"
+    ]
+}

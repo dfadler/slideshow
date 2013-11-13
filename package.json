@@ -1,0 +1,10 @@
+{
+	"name": "App",
+	"jam": {
+		"packageDir": "app/scripts/vendor",
+		"baseUrl": "app",
+		"dependencies": {
+			
+		}
+	}
+}

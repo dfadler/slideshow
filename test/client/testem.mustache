@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<title>Test'em</title>
+<link rel="stylesheet" href="/testem/mocha.css">
+<script src="/testem/chai.js"></script>
+<script src="/testem/mocha.js"></script>
+<script src="/testem.js"></script>
+<script src="/public/javascripts/vendor/bower-components/requirejs/require.js"></script>
+{{#styles}}<link rel="stylesheet" href="{{.}}">{{/styles}}
+</head>
+<body>
+<div id="mocha"></div>
+<script>
+  mocha.setup('bdd');
+  mocha.bail(false);
+  var files = [];
+
+  window.expect = chai.expect;
+  require(["../../public/javascripts/config"], function() {
+    
+    {{#serve_files}}files.push("/{{src}}");{{/serve_files}}
+    require.config({
+        baseUrl:'../../public/javascripts'
+    })
+    require(files, function() {
+      mocha.run();
+    });  
+
+  });
+</script>
+</body>
+</html>
