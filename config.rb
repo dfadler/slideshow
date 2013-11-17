@@ -4,7 +4,7 @@
 # project_path = File.dirname(__FILE__) + '/htdocs/'
 http_path = "/"
 css_dir = "public/stylesheets"
-sass_dir = "public/stylesheets"
+sass_dir = "public/sass"
 images_dir = "public/images"
 javascripts_dir = "public/javascripts"
 
