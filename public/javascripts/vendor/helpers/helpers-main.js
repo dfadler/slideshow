@@ -26,6 +26,7 @@
                  * @return dom element The created stylesheet
                  */
                 createStylesheet: function() {
+                    
                     var sheet = (function() {
                         // Create the <style> tag
                         var style = document.createElement("style");
@@ -34,13 +35,32 @@
                         // style.setAttribute("media", "screen")
                         // style.setAttribute("media", "@media only screen and (max-width : 1024px)")
 
-                        // WebKit hack :(
-                        style.appendChild(document.createTextNode(""));
+                        // style.type = 'text/css';
+                        
 
-                        // Add the <style> element to the page
-                        document.head.appendChild(style);
+                        if(!style.stylesheet && document.head){
+                            // WebKit hack  :(
+                            style.appendChild(document.createTextNode(""));
+                        }
+                        
+                        if(!document.head) {
 
-                        return style.sheet;
+                            document.getElementsByTagName('head')[0].appendChild(style);
+                            style.setAttribute('type', 'text/css');
+
+                        } else {
+                            // Add the <style> element to the page
+                            document.head.appendChild(style);
+                        }
+                        
+                        if(!style.styleSheet && !style.sheet.addRule && style.sheet.insertRule) {
+                            style.sheet.addRule = function(selector, rule) {
+                                style.sheet.insertRule(selector + "{" + rule + "}", this.cssRules.length);
+                            };
+                        }
+                        
+
+                        return style.styleSheet || style.sheet;
                     })();
 
                     return sheet;
@@ -114,6 +134,19 @@
 
                     return ['-ms-', '-moz-', '-webkit-'];
 
+                },
+
+                hasClass: function(className, el) {
+                    
+                    var classList = el.classList;
+
+                    console.log(el, className,classList.length);
+
+                    for(var i = 0, len = classList.length; i < len; i+=1) {
+                        if(classList[i] === className) {
+                            return true;
+                        }
+                    }
                 }
 
             };

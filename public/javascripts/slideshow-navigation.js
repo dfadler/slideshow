@@ -19,7 +19,7 @@ define([
         initialize: function() {
             
             var el = document.createElement('div');
-
+            // console.log(el);
             el.classList.add('navigation-element');
 
             this.el = el;
@@ -47,7 +47,7 @@ define([
             var div = document.createElement('div');
             
             helpers.forEach(this.navigationElements, function(navigationElement) {
-                navigationElement.el.innerText = navigationElement.index;
+                navigationElement.el.innerHTML = navigationElement.index;
                 if(navigationElement.index === 0) {
                     navigationElement.el.classList.add('active');
                 }
@@ -72,7 +72,7 @@ define([
 
             navigationElements[previouslyActiveIndex].classList.remove('active');
             navigationElements[currentlyActiveIndex].classList.add('active');
-            
+
         }
         
 
